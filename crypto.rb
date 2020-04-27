@@ -18,7 +18,18 @@ module Crypto
 
             item.downcase!
 
-            to_insert = alphabet[alphabet.index(item) + shift.to_i()];
+            unless alphabet.include? item
+                decrypted_text << item
+                next #dont do following
+            end
+
+            index = alphabet.index(item) + shift.to_i()
+
+            if index >= alphabet.length
+                index -= alphabet.length
+            end
+
+            to_insert = alphabet[index]
 
             if isCapital
                 to_insert.upcase!
